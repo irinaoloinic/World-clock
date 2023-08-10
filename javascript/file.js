@@ -21,3 +21,35 @@ sydneyTimeElement.innerHTML = sydneyTime.format("h:mm:ss SSS[<small>]A[<small>]"
 
 updateTime()
 setInterval(updateTime, 100);
+
+
+function updateCityTime(event){
+ let cityTimezone = event.target.value;
+ let cityName = cityTimezone.replace("_", " ").split("/")[1];
+  let cityTime = moment().tz(cityTimezone);
+  let cityElement = document.querySelector(".cities");
+   cityElement.innerHTML = `<div class="cities">
+    <div class="city" id="barcelona">
+      <div>
+      <h2> ${cityTimezone} </h2>
+     <div class="date"> ${cityTime.format("MMMM Do YYYY")} </div>
+     </div>
+     <div>
+     <div class="time"> ${cityTime.format("h:mm:ss SS")}} <small> ${cityTime.format("A")}</small> </div>
+     </div>
+    </div>
+
+    <div class="city" id="sydney">
+      <div>
+      <h2>Sydney 🇦🇺</h2>
+     <div class="date"></div>
+     </div>
+     <div>
+     <div class="time"> </div>
+     </div>
+    </div>
+  </div>`
+
+}
+let citiesSelect=document.querySelector("#local-city");
+citiesSelect.addEventListener("change", updateCityTime);
